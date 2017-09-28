@@ -297,7 +297,7 @@ _Grading:_ We will check that you only changed one of the given parameters, and 
 
 Consider the `DiscountGrid` layout, shown below. This grid has two terminal states with positive payoff (in the middle row), a close exit with payoff +1 and a distant exit with payoff +10\. The bottom row of the grid consists of terminal states with negative payoff (shown in red); each state in this "cliff" region has payoff -10\. The starting state is the yellow square. We distinguish between two types of paths: (1) paths that "risk the cliff" and travel near the bottom row of the grid; these paths are shorter but risk earning a large negative payoff, and are represented by the red arrow in the figure below. (2) paths that "avoid the cliff" and travel along the top edge of the grid. These paths are longer but are less likely to incur huge negative payoffs. These paths are represented by the green arrow in the figure below.
 
-<center>![DiscountGrid](https://s3-us-west-2.amazonaws.com/cs188websitecontent/projects/release/reinforcement/v1/001/discountgrid.png)</center>
+![DiscountGrid](https://github.com/HEATlab/cs151-reinforcement/blob/master/discountgrid.png)
 
 In this question, you will choose settings of the discount, noise, and living reward parameters for this MDP to produce optimal policies of several different types. Your setting of the parameter values for each part should have the property that, if your agent followed its optimal policy without being subject to any noise, it would exhibit the given behavior. If a particular behavior is not achieved for any setting of the parameters, assert that the policy is impossible by returning the string `'NOT POSSIBLE'`.
 
@@ -404,7 +404,7 @@ With the Q-learning update in place, you can watch your Q-learner learn under ma
 
 Recall that `-k` will control the number of episodes your agent gets to learn. Watch how the agent learns about the state it was just in, not the one it moves to, and "leaves learning in its wake." Hint: to help with debugging, you can turn off noise by using the `--noise 0.0` parameter (though this obviously makes Q-learning less interesting). If you manually steer Pacman north and then east along the optimal path for four episodes, you should see the following Q-values:
 
-[QLearning](https://github.com/HEATlab/cs151-reinforcement/blob/master/q-learning.png)
+![QLearning](https://github.com/HEATlab/cs151-reinforcement/blob/master/q-learning.png)
 
 _Grading:_ We will run your Q-learning agent and check that it learns the same Q-values and policy as our reference implementation when each is presented with the same set of examples. To grade your implementation, run the autograder:
 
@@ -479,13 +479,15 @@ _Note:_ Approximate Q-learning assumes the existence of a feature function f(s,a
 
 The approximate Q-function takes the following form
 
-<center>\(Q(s,a) = \sum\limits_{i=1}^n f_i(s,a) w_i \)</center>
+![equation](http://www.sciweavers.org/tex2img.php?eq=%5C%28Q%28s%2Ca%29%20%3D%20%5Csum%5Climits_%7Bi%3D1%7D%5En%20f_i%28s%2Ca%29%20w_i%20%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+
 
 where each weight w<sub>i</sub> is associated with a particular feature f<sub>i</sub>(s,a). In your code, you should implement the weight vector as a dictionary mapping features (which the feature extractors will return) to weight values. You will update your weight vectors similarly to how you updated Q-values:
 
-<center>\(w_i \leftarrow w_i + \alpha \cdot difference \cdot f_i(s,a) \)</center>
+![equation](http://www.sciweavers.org/tex2img.php?eq=%5C%28w_i%20%5Cleftarrow%20w_i%20%2B%20%5Calpha%20%5Ccdot%20difference%20%5Ccdot%20f_i%28s%2Ca%29%20%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
 
-<center>\( difference = (r + \gamma \max\limits_{a'} Q(s', a')) - Q(s,a) \)</center>
+
+![equation](http://www.sciweavers.org/tex2img.php?eq=%24%5C%28%20difference%20%3D%20%28r%20%2B%20%5Cgamma%20%5Cmax%5Climits_%7Ba%27%7D%20Q%28s%27%2C%20a%27%29%29%20-%20Q%28s%2Ca%29%20%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0_)
 
 Note that the \(difference\) term is the same as in normal Q-learning, and \( r \) is the experienced reward.
 
