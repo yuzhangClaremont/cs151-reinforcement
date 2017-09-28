@@ -207,7 +207,7 @@ The code for this project contains the following files, which are available in a
 
 </table>
 
-**Files to Edit and Submit:** You will fill in portions of `[valueIterationAgents.py](https://github.com/HEATlab/cs151-reinforcement/blob/master/valueIterationAgents.py)`, `[qlearningAgents.py](https://github.com/HEATlab/cs151-reinforcement/blob/master/qlearningAgents.py)`, and `[analysis.py](https://github.com/HEATlab/cs151-reinforcement/blob/master/analysis.py)` during the assignment. You should submit these files with your code and comments. Please _do not_ change the other files in this distribution or submit any of our original files other than these files.
+**Files to Edit and Submit:** You will fill in portions of [valueIterationAgents.py](https://github.com/HEATlab/cs151-reinforcement/blob/master/valueIterationAgents.py), [qlearningAgents.py](https://github.com/HEATlab/cs151-reinforcement/blob/master/qlearningAgents.py), and [analysis.py](https://github.com/HEATlab/cs151-reinforcement/blob/master/analysis.py)` during the assignment. You should submit these files with your code and comments. Please _do not_ change the other files in this distribution or submit any of our original files other than these files.
 
 **Evaluation:** Your code will be autograded for technical correctness. Please _do not_ change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation -- not the autograder's judgements -- will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.
 
@@ -256,9 +256,9 @@ These quantities are all displayed in the GUI: values are numbers in squares, Q-
 
 _Important:_ Use the "batch" version of value iteration where each vector V<sub>k</sub> is computed from a fixed vector V<sub>k-1</sub> (like in lecture), not the "online" version where one single weight vector is updated in place. This means that when a state's value is updated in iteration k based on the values of its successor states, the successor state values used in the value update computation should be those from iteration k-1 (even if some of the successor states had already been updated in iteration k). The difference is discussed in [Sutton & Barto](http://www.cs.ualberta.ca/~sutton/book/ebook/node41.html) in the 6th paragraph of chapter 4.1.
 
-_Note:_ A policy synthesized from values of depth k (which reflect the next k rewards) will actually reflect the next k+1 rewards (i.e. you return \(\pi_{k+1}\)). Similarly, the Q-values will also reflect one more reward than the values (i.e. you return Q<sub>k+1</sub>).
+_Note:_ A policy synthesized from values of depth k (which reflect the next k rewards) will actually reflect the next k+1 rewards (i.e. you return ![pi](http://www.sciweavers.org/tex2img.php?eq=%5C%28%5Cpi_%7Bk%2B1%7D%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)). Similarly, the Q-values will also reflect one more reward than the values (i.e. you return Q<sub>k+1</sub>).
 
-You should return the synthesized policy \(\pi_{k+1}\).
+You should return the synthesized policy ![pi](http://www.sciweavers.org/tex2img.php?eq=%5C%28%5Cpi_%7Bk%2B1%7D%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0).
 
 _Hint:_ Use the `util.Counter` class in `util.py`, which is a dictionary with a default value of zero. Methods such as `totalCount` should simplify your code. However, be careful with `argMax`: the actual argmax you want may be a key not in the counter!
 
