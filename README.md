@@ -479,17 +479,15 @@ _Note:_ Approximate Q-learning assumes the existence of a feature function f(s,a
 
 The approximate Q-function takes the following form
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=%5C%28Q%28s%2Ca%29%20%3D%20%5Csum%5Climits_%7Bi%3D1%7D%5En%20f_i%28s%2Ca%29%20w_i%20%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+![equation](https://github.com/HEATlab/cs151-reinforcement/blob/master/qupdate.png)
 
 
 where each weight w<sub>i</sub> is associated with a particular feature f<sub>i</sub>(s,a). In your code, you should implement the weight vector as a dictionary mapping features (which the feature extractors will return) to weight values. You will update your weight vectors similarly to how you updated Q-values:
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=%5C%28w_i%20%5Cleftarrow%20w_i%20%2B%20%5Calpha%20%5Ccdot%20difference%20%5Ccdot%20f_i%28s%2Ca%29%20%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+![equation](https://github.com/HEATlab/cs151-reinforcement/blob/master/q_diff.png)
 
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=%24%5C%28%20difference%20%3D%20%28r%20%2B%20%5Cgamma%20%5Cmax%5Climits_%7Ba%27%7D%20Q%28s%27%2C%20a%27%29%29%20-%20Q%28s%2Ca%29%20%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0_)
-
-Note that the \(difference\) term is the same as in normal Q-learning, and \( r \) is the experienced reward.
+Note that the `difference` term is the same as in normal Q-learning, and `r` is the experienced reward.
 
 By default, `ApproximateQAgent` uses the `IdentityExtractor`, which assigns a single feature to every `(state,action)` pair. With this feature extractor, your approximate Q-learning agent should work identically to `PacmanQAgent`. You can test this with the following command:
 
@@ -512,3 +510,15 @@ _Grading:_ We will run your approximate Q-learning agent and check that it learn
 <pre>python autograder.py -q q10</pre>
 
 _Congratulations! You have a learning Pacman agent!_
+
+### <a name="submission"></a>Submission
+
+Prior to submitting, be sure you run the autograder on your own machine. Running the autograder locally will help you to debug and expediate your development process. The autograder can be invoked on your own machine using the command:
+
+<pre>python autograder.py</pre>
+
+To run the autograder on a single question, such as question 3, invoke it by
+
+<pre>python autograder.py -q q3</pre>
+
+Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will submit `multiAgents.py` to the Project 2 assignment. You and your partner may submit as a group.
