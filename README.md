@@ -2,6 +2,28 @@
 
 ## Project 3: Reinforcement Learning
 
+Version 1.003\. Last Updated: 09/28/2017\.
+
+* * *
+
+### Table of Contents
+
+*   [Introduction](#Introduction)
+*   [Welcome](#Welcome)
+*   [Q1: Value Iteration](#Q1)
+*   [Q2: Bridge Crossing Analysis](#Q2)
+*   [Q3: Policies](#Q3)
+*   [Q4: Asynchronous Value Iteration](#Q4)
+*   [Q5: Prioritized Sweeping Value Iteration](#Q5)
+*   [Q6: Q-Learning](#Q6)
+*   [Q7: Epsilon Greedy](#Q7)
+*   [Q8: Bridge Crossing Revisited](#Q8)
+*   [Q9: Q-Learning and Pacman](#Q9)
+*   [Q10: Approximate Q-Learning](#Q10)
+*   [Glossary](#Glossary)
+*   [Submission](#Submission)
+
+* * *
 <div class="project">
 
 ![capsuleClassic layout](https://github.com/HEATlab/cs151-reinforcement/blob/master/capsule.png)
@@ -321,7 +343,7 @@ _Note:_ On some machines you may not see an arrow. In this case, press a button 
 
 _Grading:_ We will check that the desired policy is returned in each case.
 
-### Question 4 (1 point): Asynchronous Value Iteration
+### <a name="Q4"></a>Question 4 (1 point): Asynchronous Value Iteration
 
 Write a value iteration agent in `AsynchronousValueIterationAgent`, which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span> takes an MDP on construction and runs _cyclic _value iteration (described in the next paragraph) for the specified number of iterations before the constructor returns. Note that all this value iteration code should be placed inside the constructor (`__init__` method).
 
@@ -347,7 +369,7 @@ The following command loads your <span style="font-family: monospace, serif; li
 
 _Grading:_ Your value iteration agent will be graded on a new grid. We will check your values, Q-values, and policies after fixed numbers of iterations and at convergence (e.g., after 1000 iterations).
 
-### Question 5 (3 points): Prioritized Sweeping Value Iteration
+### <a name="Q5"></a>Question 5 (3 points): Prioritized Sweeping Value Iteration
 
 You will now implement `PrioritizedSweepingValueIterationAgent`, which has been partially specified for you in `valueIterationAgents.py`<span style="line-height: 25.6px; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">. Note that this class derives from </span><span style="line-height: 25.6px; font-stretch: inherit; font-family: monospace, serif;">AsynchronousValueIterationAgent</span><span style="line-height: 25.6px; font-stretch: inherit; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">, so the only method that needs to change is `runValueIteration`</span><span style="line-height: 25.6px; font-stretch: inherit; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">, which actually runs the value iteration.</span>
 
@@ -388,7 +410,7 @@ You can run the <span style="font-style: inherit; font-variant: inherit; font-w
 
 _Grading:_ Your prioritized sweeping value iteration agent will be graded on a new grid. We will check your values, Q-values, and policies after fixed numbers of iterations and at convergence (e.g., after 1000 iterations).
 
-### <a name="Q4"></a>Question 6 (4 points): Q-Learning
+### <a name="Q6"></a>Question 6 (4 points): Q-Learning
 
 Note that your value iteration agent does not actually learn from experience. Rather, it ponders its MDP model to arrive at a complete policy before ever interacting with a real environment. When it does interact with the environment, it simply follows the precomputed policy (e.g. it becomes a reflex agent). This distinction may be subtle in a simulated environment like a Gridword, but it's very important in the real world, where the real MDP is not available.
 
@@ -410,7 +432,7 @@ _Grading:_ We will run your Q-learning agent and check that it learns the same Q
 
 <pre>python autograder.py -q q6</pre>
 
-### <a name="Q5"></a>Question 7 (2 points): Epsilon Greedy
+### <a name="Q7"></a>Question 7 (2 points): Epsilon Greedy
 
 Complete your Q-learning agent by implementing epsilon-greedy action selection in `getAction`, meaning it chooses random actions an epsilon fraction of the time, and follows its current best Q-values otherwise. Note that choosing a random action may result in choosing the best action - that is, you should not choose a random sub-optimal action, but rather _any_ random legal action.
 
@@ -440,7 +462,7 @@ If this doesn't work, you've probably written some code too specific to the `Gri
 
 This will invoke the crawling robot from class using your Q-learner. Play around with the various learning parameters to see how they affect the agent's policies and actions. Note that the step delay is a parameter of the simulation, whereas the learning rate and epsilon are parameters of your learning algorithm, and the discount factor is a property of the environment.
 
-### <a name="Q6"></a>Question 8 (1 point): Bridge Crossing Revisited
+### <a name="Q8"></a>Question 8 (1 point): Bridge Crossing Revisited
 
 First, train a completely random Q-learner with the default learning rate on the noiseless BridgeGrid for 50 episodes and observe whether it finds the optimal policy.
 
@@ -454,24 +476,39 @@ To grade your answer, run the autograder:
 
 <pre>python autograder.py -q q8</pre>
 
-<h3><a name="Q7"></a>Question 9 (1 point): Q-Learning and Pacman</h3>
-<p>Time to play some Pacman! Pacman will play games in two phases. In the first phase, <em>training</em>, Pacman will begin to learn about the values of positions and actions. Because it takes a very long time to learn accurate Q-values even for tiny grids, Pacman's training games run in quiet mode by default, with no GUI (or console) display. Once Pacman's training is complete, he will enter <em>testing</em> mode. When testing, Pacman's <code>self.epsilon</code> and <code>self.alpha</code> will be set to 0.0, effectively stopping Q-learning and disabling exploration, in order to allow Pacman to exploit his learned policy. Test games are shown in the GUI by default. Without any code changes you should be able to run Q-learning Pacman for very tiny grids as follows:</p>
-<pre>python pacman.py -p PacmanQAgent -x 2000 -n 2010 -l smallGrid </pre>
-<p>Note that <code>PacmanQAgent</code> is already defined for you in terms of the <code>QLearningAgent</code> you've already written. <code>PacmanQAgent</code> is only different in that it has default learning parameters that are more effective for the Pacman problem (<code>epsilon=0.05, alpha=0.2, gamma=0.8</code>). You will receive full credit for this question if the command above works without exceptions and your agent wins at least 80% of the time. The autograder will run 100 test games after the 2000 training games.</p>
-<p><em>Hint:</em> If your <code>QLearningAgent</code> works for <code>gridworld.py</code> and <code>crawler.py</code> but does not seem to be learning a good policy for Pacman on <code>smallGrid</code>, it may be because your <code>getAction</code> and/or <code>computeActionFromQValues</code> methods do not in some cases properly consider unseen actions. In particular, because unseen actions have by definition a Q-value of zero, if all of the actions that <em>have</em> been seen have negative Q-values, an unseen action may be optimal. Beware of the argmax function from util.Counter!</p>
-<p><em>Note:</em> To grade your answer, run:</p>
-<pre>python autograder.py -q q9</pre>
-<p><em>Note:</em> If you want to experiment with learning parameters, you can use the option <code>-a</code>, for example <code>-a epsilon=0.1,alpha=0.3,gamma=0.7</code>. These values will then be accessible as <code>self.epsilon, self.gamma</code> and <code>self.alpha</code> inside the agent.</p>
-<p><em>Note:</em> While a total of 2010 games will be played, the first 2000 games will not be displayed because of the option <code>-x 2000</code>, which designates the first 2000 games for training (no output). Thus, you will only see Pacman play the last 10 of these games. The number of training games is also passed to your agent as the option <code>numTraining</code>.</p>
-<p><em>Note:</em> If you want to watch 10 training games to see what's going on, use the command:</p>
-<pre>python pacman.py -p PacmanQAgent -n 10 -l smallGrid -a numTraining=10</pre>
-<p>During training, you will see output every 100 games with statistics about how Pacman is faring. Epsilon is positive during training, so Pacman will play poorly even after having learned a good policy: this is because he occasionally makes a random exploratory move into a ghost. As a benchmark, it should take between 1,000 and 1400 games before Pacman's rewards for a 100 episode segment becomes positive, reflecting that he's started winning more than losing. By the end of training, it should remain positive and be fairly high (between 100 and 350).</p>
-<p>Make sure you understand what is happening here: the MDP state is the <em>exact</em> board configuration facing Pacman, with the now complex transitions describing an entire ply of change to that state. The intermediate game configurations in which Pacman has moved but the ghosts have not replied are <em>not</em> MDP states, but are bundled in to the transitions.</p>
-<p>Once Pacman is done training, he should win very reliably in test games (at least 90% of the time), since now he is exploiting his learned policy.</p>
-<p>However, you will find that training the same agent on the seemingly simple <code>mediumGrid</code> does not work well. In our implementation, Pacman's average training rewards remain negative throughout training. At test time, he plays badly, probably losing all of his test games. Training will also take a long time, despite its ineffectiveness.</p>
-<p>Pacman fails to win on larger layouts because each board configuration is a separate state with separate Q-values. He has no way to generalize that running into a ghost is bad for all positions. Obviously, this approach will not scale.</p>
+### <a name="Q9"></a>Question 9 (1 point): Q-Learning and Pacman
 
-### <a name="Q8"></a>Question 10 (3 points): Approximate Q-Learning
+Time to play some Pacman! Pacman will play games in two phases. In the first phase, _training_, Pacman will begin to learn about the values of positions and actions. Because it takes a very long time to learn accurate Q-values even for tiny grids, Pacman's training games run in quiet mode by default, with no GUI (or console) display. Once Pacman's training is complete, he will enter _testing_ mode. When testing, Pacman's `self.epsilon` and `self.alpha` will be set to 0.0, effectively stopping Q-learning and disabling exploration, in order to allow Pacman to exploit his learned policy. Test games are shown in the GUI by default. Without any code changes you should be able to run Q-learning Pacman for very tiny grids as follows:
+
+<pre>python pacman.py -p PacmanQAgent -x 2000 -n 2010 -l smallGrid </pre>
+
+Note that `PacmanQAgent` is already defined for you in terms of the `QLearningAgent` you've already written. `PacmanQAgent` is only different in that it has default learning parameters that are more effective for the Pacman problem (`epsilon=0.05, alpha=0.2, gamma=0.8`). You will receive full credit for this question if the command above works without exceptions and your agent wins at least 80% of the time. The autograder will run 100 test games after the 2000 training games.
+
+_Hint:_ If your `QLearningAgent` works for `gridworld.py` and `crawler.py` but does not seem to be learning a good policy for Pacman on `smallGrid`, it may be because your `getAction` and/or `computeActionFromQValues` methods do not in some cases properly consider unseen actions. In particular, because unseen actions have by definition a Q-value of zero, if all of the actions that _have_ been seen have negative Q-values, an unseen action may be optimal. Beware of the argmax function from util.Counter!
+
+_Note:_ To grade your answer, run:
+
+<pre>python autograder.py -q q9</pre>
+
+_Note:_ If you want to experiment with learning parameters, you can use the option `-a`, for example `-a epsilon=0.1,alpha=0.3,gamma=0.7`. These values will then be accessible as `self.epsilon, self.gamma` and `self.alpha` inside the agent.
+
+_Note:_ While a total of 2010 games will be played, the first 2000 games will not be displayed because of the option `-x 2000`, which designates the first 2000 games for training (no output). Thus, you will only see Pacman play the last 10 of these games. The number of training games is also passed to your agent as the option `numTraining`.
+
+_Note:_ If you want to watch 10 training games to see what's going on, use the command:
+
+<pre>python pacman.py -p PacmanQAgent -n 10 -l smallGrid -a numTraining=10</pre>
+
+During training, you will see output every 100 games with statistics about how Pacman is faring. Epsilon is positive during training, so Pacman will play poorly even after having learned a good policy: this is because he occasionally makes a random exploratory move into a ghost. As a benchmark, it should take between 1,000 and 1400 games before Pacman's rewards for a 100 episode segment becomes positive, reflecting that he's started winning more than losing. By the end of training, it should remain positive and be fairly high (between 100 and 350).
+
+Make sure you understand what is happening here: the MDP state is the _exact_ board configuration facing Pacman, with the now complex transitions describing an entire ply of change to that state. The intermediate game configurations in which Pacman has moved but the ghosts have not replied are _not_ MDP states, but are bundled in to the transitions.
+
+Once Pacman is done training, he should win very reliably in test games (at least 90% of the time), since now he is exploiting his learned policy.
+
+However, you will find that training the same agent on the seemingly simple `mediumGrid` does not work well. In our implementation, Pacman's average training rewards remain negative throughout training. At test time, he plays badly, probably losing all of his test games. Training will also take a long time, despite its ineffectiveness.
+
+Pacman fails to win on larger layouts because each board configuration is a separate state with separate Q-values. He has no way to generalize that running into a ghost is bad for all positions. Obviously, this approach will not scale.
+
+### <a name="Q10"></a>Question 10 (3 points): Approximate Q-Learning
 
 Implement an approximate Q-learning agent that learns weights for features of states, where many states might share the same features. Write your implementation in `ApproximateQAgent` class in `qlearningAgents.py`, which is a subclass of `PacmanQAgent`.
 
@@ -510,6 +547,9 @@ _Grading:_ We will run your approximate Q-learning agent and check that it learn
 <pre>python autograder.py -q q10</pre>
 
 _Congratulations! You have a learning Pacman agent!_
+
+### <a name="Glossary"></a>Object Glossary
+
 
 ### <a name="submission"></a>Submission
 
