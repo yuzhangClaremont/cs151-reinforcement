@@ -521,4 +521,4 @@ To run the autograder on a single question, such as question 3, invoke it by
 
 <pre>python autograder.py -q q3</pre>
 
-Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will submit `multiAgents.py` to the Project 2 assignment. You and your partner may submit as a group.
+Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will submit `valueIterationAgents.py`, `qlearningAgents.py`, and `analysis.py` to the Project 3 assignment. You and your partner may submit as a group.
