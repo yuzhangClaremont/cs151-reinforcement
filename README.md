@@ -237,13 +237,15 @@ The code for this project contains the following files, which are available in a
 
 **Getting Help:** You are not alone! If you find yourself stuck on something, contact the course staff for help. Office hours, section, and the discussion forum are there for your support; please use them. If you can't make our office hours, let us know and we will schedule more. We want these projects to be rewarding and instructional, not frustrating and demoralizing. But, we don't know when or how to help unless you ask.
 
+> "You're a novice -- that's why you're here. You're here to learn. The teacher is a resource for learning."--Carol S. Dweck, _Mindset_
+
 **Discussion:** Please be careful not to post spoilers.
 
 </div>
 
 ### <a name="Welcome"></a>MDPs
 
-To get started, run Gridworld in manual control mode, which uses the arrow keys:
+To get started, **run Gridworld in manual control mode**, which uses the arrow keys:
 
 <pre>python gridworld.py -m</pre>
 
@@ -261,32 +263,32 @@ You should see the random agent bounce around the grid until it happens upon an 
 
 _Note:_ The Gridworld MDP is such that you first must enter a pre-terminal state (the double boxes shown in the GUI) and then take the special 'exit' action before the episode actually ends (in the true terminal state called `TERMINAL_STATE`, which is not shown in the GUI). If you run an episode manually, your total return may be less than you expected, due to the discount rate (`-d` to change; 0.9 by default).
 
-Look at the console output that accompanies the graphical output (or use `-t` for all text). You will be told about each transition the agent experiences (to turn this off, use `-q`).
+**Look at the console output that accompanies the graphical output** (or use `-t` for all text). You will be told about each transition the agent experiences (to turn this off, use `-q`).
 
 As in Pacman, positions are represented by `(x,y)` Cartesian coordinates and any arrays are indexed by `[x][y]`, with `'north'` being the direction of increasing `y`, etc. By default, most transitions will receive a reward of zero, though you can change this with the living reward option (`-r`).
 
 ### <a name="Q1"></a>Question 1 (4 points): Value Iteration
 
-Write a value iteration agent in `ValueIterationAgent`, which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. `ValueIterationAgent` takes an MDP on construction and calls `runValueIteration`, which runs value iteration for `self.iterations` iterations before the constructor returns.
+**Write a value iteration agent in `ValueIterationAgent`**, which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. `ValueIterationAgent` takes an MDP on construction and calls `runValueIteration`, which runs value iteration for `self.iterations` iterations before the constructor returns.
 
-Value iteration computes k-step estimates of the optimal values, V<sub>k</sub>. In addition to running value iteration, implement the following methods for `ValueIterationAgent` using V<sub>k</sub>.
+Value iteration computes k-step estimates of the optimal values, V<sub>k</sub>. In addition to running value iteration, **implement the following methods for `ValueIterationAgent` using V<sub>k</sub>.**
 
 *   `computeActionFromValues(state)` computes the best action according to the value function given by `self.values`.
 *   `computeQValueFromValues(state, action)` returns the Q-value of the (state, action) pair given by the value function given by `self.values`.
 
 These quantities are all displayed in the GUI: values are numbers in squares, Q-values are numbers in square quarters, and policies are arrows out from each square.
 
-_Important:_ Use the "batch" version of value iteration where each vector V<sub>k</sub> is computed from a fixed vector V<sub>k-1</sub> (like in lecture), not the "online" version where one single weight vector is updated in place. This means that when a state's value is updated in iteration k based on the values of its successor states, the successor state values used in the value update computation should be those from iteration k-1 (even if some of the successor states had already been updated in iteration k). The difference is discussed in [Sutton & Barto](http://incompleteideas.net/sutton/book/the-book.html) in the 6th paragraph of chapter 4.1.
+_Important:_ **Use the "batch" version of value iteration** where each vector V<sub>k</sub> is computed from a fixed vector V<sub>k-1</sub> (like in lecture), not the "online" version where one single weight vector is updated in place. This means that when a state's value is updated in iteration k based on the values of its successor states, the successor state values used in the value update computation should be those from iteration k-1 (even if some of the successor states had already been updated in iteration k). The difference is discussed in [Sutton & Barto](http://incompleteideas.net/sutton/book/the-book.html) in the 6th paragraph of chapter 4.1.
 
 _Note:_ A policy synthesized from values of depth k (which reflect the next k rewards) will actually reflect the next k+1 rewards (i.e. you return ![pi](http://www.sciweavers.org/tex2img.php?eq=%5C%28%5Cpi_%7Bk%2B1%7D%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)). Similarly, the Q-values will also reflect one more reward than the values (i.e. you return Q<sub>k+1</sub>).
 
-You should return the synthesized policy ![pi](http://www.sciweavers.org/tex2img.php?eq=%5C%28%5Cpi_%7Bk%2B1%7D%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0).
+You should **return the synthesized policy** ![pi](http://www.sciweavers.org/tex2img.php?eq=%5C%28%5Cpi_%7Bk%2B1%7D%5C%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0).
 
 _Hint:_ Use the `util.Counter` class in `util.py`, which is a dictionary with a default value of zero. Methods such as `totalCount` should simplify your code. However, be careful with `argMax`: the actual argmax you want may be a key not in the counter!
 
 _Note:_ Make sure to handle the case when a state has no available actions in an MDP (think about what this means for future rewards).
 
-To test your implementation, run the autograder:
+To test your implementation, **run the autograder**:
 
 <pre>python autograder.py -q q1</pre>
 
@@ -305,13 +307,13 @@ _Grading:_ Your value iteration agent will be graded on a new grid. We will chec
 
 ### <a name="Q2"></a>Question 2 (1 point): Bridge Crossing Analysis
 
-`BridgeGrid` is a grid world map with the a low-reward terminal state and a high-reward terminal state separated by a narrow "bridge", on either side of which is a chasm of high negative reward. The agent starts near the low-reward state. With the default discount of 0.9 and the default noise of 0.2, the optimal policy does not cross the bridge. Change only ONE of the discount and noise parameters so that the optimal policy causes the agent to attempt to cross the bridge. Put your answer in `question2()` of `analysis.py`. (Noise refers to how often an agent ends up in an unintended successor state when they perform an action.) The default corresponds to:
+`BridgeGrid` is a grid world map with the a low-reward terminal state and a high-reward terminal state separated by a narrow "bridge", on either side of which is a chasm of high negative reward. The agent starts near the low-reward state. With the default discount of 0.9 and the default noise of 0.2, the optimal policy does not cross the bridge. **Change only ONE of the discount and noise parameters so that the optimal policy causes the agent to attempt to cross the bridge. Put your answer in `question2()` of `analysis.py`.** (Noise refers to how often an agent ends up in an unintended successor state when they perform an action.) The default corresponds to:
 
 <pre>python gridworld.py -a value -i 100 -g BridgeGrid --discount 0.9 --noise 0.2</pre>
 
 ![value iteration with k=100](https://github.com/HEATlab/cs151-reinforcement/blob/master/value-q2.png)
 
-_Grading:_ We will check that you only changed one of the given parameters, and that with this change, a correct value iteration agent should cross the bridge. To check your answer, run the autograder:
+_Grading:_ We will check that you only changed one of the given parameters, and that with this change, a correct value iteration agent should cross the bridge. To check your answer, **run the autograder:**
 
 <pre>python autograder.py -q q2</pre>
 
@@ -321,9 +323,9 @@ Consider the `DiscountGrid` layout, shown below. This grid has two terminal stat
 
 ![DiscountGrid](https://github.com/HEATlab/cs151-reinforcement/blob/master/discountgrid.png)
 
-In this question, you will choose settings of the discount, noise, and living reward parameters for this MDP to produce optimal policies of several different types. Your setting of the parameter values for each part should have the property that, if your agent followed its optimal policy without being subject to any noise, it would exhibit the given behavior. If a particular behavior is not achieved for any setting of the parameters, assert that the policy is impossible by returning the string `'NOT POSSIBLE'`.
+In this question, you will **choose settings of the discount, noise, and living reward parameters for this MDP to produce optimal policies of several different types.** Your setting of the parameter values for each part should have the property that, if your agent followed its optimal policy without being subject to any noise, it would exhibit the given behavior. If a particular behavior is not achieved for any setting of the parameters, assert that the policy is impossible by returning the string `'NOT POSSIBLE'`.
 
-Here are the optimal policy types you should attempt to produce:
+**Here are the optimal policy types you should attempt to produce:**
 
 1.  Prefer the close exit (+1), risking the cliff (-10)
 2.  Prefer the close exit (+1), but avoiding the cliff (-10)
@@ -331,11 +333,11 @@ Here are the optimal policy types you should attempt to produce:
 4.  Prefer the distant exit (+10), avoiding the cliff (-10)
 5.  Avoid both exits and the cliff (so an episode should never terminate)
 
-To check your answers, run the autograder:
+To check your answers, **run the autograder:**
 
 <pre>python autograder.py -q q3</pre>
 
-`question3a()` through `question3e()` should each return a 3-item tuple of (discount, noise, living reward) in `analysis.py`.
+**`question3a()` through `question3e()` should each return a 3-item tuple of (discount, noise, living reward) in `analysis.py`.**
 
 _Note:_ You can check your policies in the GUI. For example, using a correct answer to 3(a), the arrow in (0,1) should point east, the arrow in (1,1) should also point east, and the arrow in (2,1) should point north.
 
@@ -345,7 +347,7 @@ _Grading:_ We will check that the desired policy is returned in each case.
 
 ### <a name="Q4"></a>Question 4 (1 point): Asynchronous Value Iteration
 
-Write a value iteration agent in `AsynchronousValueIterationAgent`, which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span> takes an MDP on construction and runs _cyclic _value iteration (described in the next paragraph) for the specified number of iterations before the constructor returns. Note that all this value iteration code should be placed inside the constructor (`__init__` method).
+**Write a value iteration agent in `AsynchronousValueIterationAgent`,** which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span> takes an MDP on construction and runs _cyclic _value iteration (described in the next paragraph) for the specified number of iterations before the constructor returns. Note that all this value iteration code should be placed inside the constructor (`__init__` method).
 
 The reason this class is called <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span><span style="line-height: 25.6px;"> </span><span style="line-height: 25.6px;">is because we will update only **one** state in each iteration, as opposed to doing a batch-style update. </span><span style="line-height: 25.6px;">Here is how cyclic value iteration works. In the first iteration, only update the value of the first state in the states list. In the second iteration, only update the value of the second. Keep going until you have updated the value of each state once, then start back at the first state for the subsequent iteration. **If the state picked for updating is terminal, nothing happens in that iteration.** You should be indexing into the </span>`states`<span style="line-height: 25.6px;"> variable defined in the code skeleton.</span>
 
@@ -357,9 +359,9 @@ Value iteration iterates a fixed-point equation, as discussed in class. It is al
 
 `AsynchronousValueIterationAgent` inherits from `ValueIterationAgent` from Q1, so the only method you need to implement is `runValueIteration`. Since the superclass constructor calls `runValueIteration`, overriding it is sufficient to change the agent's behavior as desired.
 
-_Note:_ Make sure to handle the case when a state has no available actions in an MDP (think about what this means for future rewards).
+_Note:_ Make sure to **handle the case when a state has no available actions in an MDP** (think about what this means for future rewards).
 
-To test your implementation, run the autograder. <span style="line-height: 25.6px; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">It should take less than a second to run. </span>**If it takes much longer, you may run into issues later in the project, so make your implementation more efficient now.**
+To test your implementation, **run the autograder**. <span style="line-height: 25.6px; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">It should take less than a second to run. </span>**If it takes much longer, you may run into issues later in the project, so make your implementation more efficient now.**
 
 <pre style="font-size: 16px; line-height: 25.6000003814697px;">python autograder.py -q q4</pre>
 
@@ -371,7 +373,7 @@ _Grading:_ Your value iteration agent will be graded on a new grid. We will che
 
 ### <a name="Q5"></a>Question 5 (3 points): Prioritized Sweeping Value Iteration
 
-You will now implement `PrioritizedSweepingValueIterationAgent`, which has been partially specified for you in `valueIterationAgents.py`<span style="line-height: 25.6px; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">. Note that this class derives from </span><span style="line-height: 25.6px; font-stretch: inherit; font-family: monospace, serif;">AsynchronousValueIterationAgent</span><span style="line-height: 25.6px; font-stretch: inherit; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">, so the only method that needs to change is `runValueIteration`</span><span style="line-height: 25.6px; font-stretch: inherit; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">, which actually runs the value iteration.</span>
+You will now **implement `PrioritizedSweepingValueIterationAgent`**, which has been partially specified for you in `valueIterationAgents.py`<span style="line-height: 25.6px; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">. Note that this class derives from </span><span style="line-height: 25.6px; font-stretch: inherit; font-family: monospace, serif;">AsynchronousValueIterationAgent</span><span style="line-height: 25.6px; font-stretch: inherit; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">, so the only method that needs to change is `runValueIteration`</span><span style="line-height: 25.6px; font-stretch: inherit; font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;">, which actually runs the value iteration.</span>
 
 Prioritized sweeping attempts to focus updates of state values in ways that are likely to change the policy.
 
@@ -398,9 +400,9 @@ Prioritized sweeping attempts to focus updates of state values in ways that are 
 A couple of important notes on implementation:
 
 *   When you compute predecessors of a state, make sure to store them in a **set**, not a list, to avoid duplicates.
-*   <span style="line-height: 25.6px;">Please use `util.PriorityQueue` in your implementation. The `update` method in this class will likely be useful; look at its documentation.</span>
+*   <span style="line-height: 25.6px;">Please **use `util.PriorityQueue`** in your implementation. The `update` method in this class will likely be useful; look at its documentation.</span>
 
-To test your implementation, run the autograder. It should take about 1 second to run. **If it takes much longer, you may run into issues later in the project, so make your implementation more efficient now.**
+To test your implementation, **run the autograder**. It should take about 1 second to run. **If it takes much longer, you may run into issues later in the project, so make your implementation more efficient now.**
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q5</pre>
 
@@ -414,7 +416,7 @@ _Grading:_ Your prioritized sweeping value iteration agent will be graded on a
 
 Note that your value iteration agent does not actually learn from experience. Rather, it ponders its MDP model to arrive at a complete policy before ever interacting with a real environment. When it does interact with the environment, it simply follows the precomputed policy (e.g. it becomes a reflex agent). This distinction may be subtle in a simulated environment like a Gridword, but it's very important in the real world, where the real MDP is not available.
 
-You will now write a Q-learning agent, which does very little on construction, but instead learns by trial and error from interactions with the environment through its `update(state, action, nextState, reward)` method. A stub of a Q-learner is specified in `QLearningAgent` in `qlearningAgents.py`, and you can select it with the option `'-a q'`. For this question, you must implement the `update`, `computeValueFromQValues`, `getQValue`, and `computeActionFromQValues` methods.
+You will now write a Q-learning agent, which does very little on construction, but instead learns by trial and error from interactions with the environment through its `update(state, action, nextState, reward)` method. A stub of a Q-learner is specified in `QLearningAgent` in `qlearningAgents.py`, and you can select it with the option `'-a q'`. For this question, you must **implement the `update`, `computeValueFromQValues`, `getQValue`, and `computeActionFromQValues` methods.**
 
 _Note:_ For `computeActionFromQValues`, you should break ties randomly for better behavior. The `random.choice()` function will help. In a particular state, actions that your agent _hasn't_ seen before still have a Q-value, specifically a Q-value of zero, and if all of the actions that your agent _has_ seen before have a negative Q-value, an unseen action may be optimal.
 
@@ -428,17 +430,17 @@ Recall that `-k` will control the number of episodes your agent gets to learn. W
 
 ![QLearning](https://github.com/HEATlab/cs151-reinforcement/blob/master/q-learning.png)
 
-_Grading:_ We will run your Q-learning agent and check that it learns the same Q-values and policy as our reference implementation when each is presented with the same set of examples. To grade your implementation, run the autograder:
+_Grading:_ We will run your Q-learning agent and check that it learns the same Q-values and policy as our reference implementation when each is presented with the same set of examples. To grade your implementation, **run the autograder:**
 
 <pre>python autograder.py -q q6</pre>
 
 ### <a name="Q7"></a>Question 7 (2 points): Epsilon Greedy
 
-Complete your Q-learning agent by implementing epsilon-greedy action selection in `getAction`, meaning it chooses random actions an epsilon fraction of the time, and follows its current best Q-values otherwise. Note that choosing a random action may result in choosing the best action - that is, you should not choose a random sub-optimal action, but rather _any_ random legal action.
+Complete your Q-learning agent by **implementing epsilon-greedy action selection in `getAction`**, meaning it chooses random actions an epsilon fraction of the time, and follows its current best Q-values otherwise. Note that choosing a random action may result in choosing the best action - that is, you should not choose a random sub-optimal action, but rather _any_ random legal action.
 
 You can choose an element from a list uniformly at random by calling the `random.choice` function. You can simulate a binary variable with probability `p` of success by using `util.flipCoin(p)`, which returns `True` with probability `p` and `False` with probability `1-p`.
 
-After implementing the `getAction` method, observe the following behavior of the agent in gridworld (with epsilon = 0.3).
+After implementing the `getAction` method, **observe the following behavior of the agent in gridworld (with epsilon = 0.3).**
 
 <pre>python gridworld.py -a q -k 100 </pre>
 
@@ -450,7 +452,7 @@ You can also observe the following simulations for different epsilon values. Doe
 
 <pre>python gridworld.py -a q -k 100 --noise 0.0 -e 0.9</pre>
 
-To test your implementation, run the autograder:
+To test your implementation, **run the autograder:**
 
 <pre>python autograder.py -q q7</pre>
 
@@ -464,15 +466,15 @@ This will invoke the crawling robot from class using your Q-learner. Play around
 
 ### <a name="Q8"></a>Question 8 (1 point): Bridge Crossing Revisited
 
-First, train a completely random Q-learner with the default learning rate on the noiseless BridgeGrid for 50 episodes and observe whether it finds the optimal policy.
+First, **train a completely random Q-learner** with the default learning rate on the noiseless BridgeGrid for 50 episodes and observe whether it finds the optimal policy.
 
 <pre>python gridworld.py -a q -k 50 -n 0 -g BridgeGrid -e 1</pre>
 
-Now try the same experiment with an epsilon of 0\. Is there an epsilon and a learning rate for which it is highly likely (greater than 99%) that the optimal policy will be learned after 50 iterations? `question8()` in `analysis.py` should return EITHER a 2-item tuple of `(epsilon, learning rate)` OR the string `'NOT POSSIBLE'` if there is none. Epsilon is controlled by `-e`, learning rate by `-l`.
+Now **try the same experiment with an epsilon of 0\.** Is there an epsilon and a learning rate for which it is highly likely (greater than 99%) that the optimal policy will be learned after 50 iterations? `question8()` in `analysis.py` should return EITHER a 2-item tuple of `(epsilon, learning rate)` OR the string `'NOT POSSIBLE'` if there is none. Epsilon is controlled by `-e`, learning rate by `-l`.
 
 _Note:_ Your response should be not depend on the exact tie-breaking mechanism used to choose actions. This means your answer should be correct even if for instance we rotated the entire bridge grid world 90 degrees.
 
-To grade your answer, run the autograder:
+To grade your answer, **run the autograder:**
 
 <pre>python autograder.py -q q8</pre>
 
@@ -482,11 +484,11 @@ Time to play some Pacman! Pacman will play games in two phases. In the first pha
 
 <pre>python pacman.py -p PacmanQAgent -x 2000 -n 2010 -l smallGrid </pre>
 
-Note that `PacmanQAgent` is already defined for you in terms of the `QLearningAgent` you've already written. `PacmanQAgent` is only different in that it has default learning parameters that are more effective for the Pacman problem (`epsilon=0.05, alpha=0.2, gamma=0.8`). You will receive full credit for this question if the command above works without exceptions and your agent wins at least 80% of the time. The autograder will run 100 test games after the 2000 training games.
+Note that `PacmanQAgent` is already defined for you in terms of the `QLearningAgent` you've already written. `PacmanQAgent` is only different in that it has default learning parameters that are more effective for the Pacman problem (`epsilon=0.05, alpha=0.2, gamma=0.8`). **You will receive full credit for this question if the command above works without exceptions and your agent wins at least 80% of the time.** The autograder will run 100 test games after the 2000 training games.
 
 _Hint:_ If your `QLearningAgent` works for `gridworld.py` and `crawler.py` but does not seem to be learning a good policy for Pacman on `smallGrid`, it may be because your `getAction` and/or `computeActionFromQValues` methods do not in some cases properly consider unseen actions. In particular, because unseen actions have by definition a Q-value of zero, if all of the actions that _have_ been seen have negative Q-values, an unseen action may be optimal. Beware of the argmax function from util.Counter!
 
-_Note:_ To grade your answer, run:
+_Note:_ To grade your answer, **run:**
 
 <pre>python autograder.py -q q9</pre>
 
@@ -500,7 +502,7 @@ _Note:_ If you want to watch 10 training games to see what's going on, use the c
 
 During training, you will see output every 100 games with statistics about how Pacman is faring. Epsilon is positive during training, so Pacman will play poorly even after having learned a good policy: this is because he occasionally makes a random exploratory move into a ghost. As a benchmark, it should take between 1,000 and 1400 games before Pacman's rewards for a 100 episode segment becomes positive, reflecting that he's started winning more than losing. By the end of training, it should remain positive and be fairly high (between 100 and 350).
 
-Make sure you understand what is happening here: the MDP state is the _exact_ board configuration facing Pacman, with the now complex transitions describing an entire ply of change to that state. The intermediate game configurations in which Pacman has moved but the ghosts have not replied are _not_ MDP states, but are bundled in to the transitions.
+**Make sure you understand what is happening here:** the MDP state is the _exact_ board configuration facing Pacman, with the now complex transitions describing an entire ply of change to that state. The intermediate game configurations in which Pacman has moved but the ghosts have not replied are _not_ MDP states, but are bundled in to the transitions.
 
 Once Pacman is done training, he should win very reliably in test games (at least 90% of the time), since now he is exploiting his learned policy.
 
@@ -510,7 +512,7 @@ Pacman fails to win on larger layouts because each board configuration is a sepa
 
 ### <a name="Q10"></a>Question 10 (3 points): Approximate Q-Learning
 
-Implement an approximate Q-learning agent that learns weights for features of states, where many states might share the same features. Write your implementation in `ApproximateQAgent` class in `qlearningAgents.py`, which is a subclass of `PacmanQAgent`.
+Implement an approximate Q-learning agent that learns weights for features of states, where many states might share the same features. **Write your implementation in `ApproximateQAgent` class in `qlearningAgents.py`,** which is a subclass of `PacmanQAgent`.
 
 _Note:_ Approximate Q-learning assumes the existence of a feature function f(s,a) over state and action pairs, which yields a vector f<sub>1</sub>(s,a) .. f<sub>i</sub>(s,a) .. f<sub>n</sub>(s,a) of feature values. We provide feature functions for you in `featureExtractors.py`. Feature vectors are `util.Counter` (like a dictionary) objects containing the non-zero pairs of features and values; all omitted features have value zero.
 
@@ -532,7 +534,7 @@ By default, `ApproximateQAgent` uses the `IdentityExtractor`, which assigns a si
 
 _Important:_ `ApproximateQAgent` is a subclass of `QLearningAgent`, and it therefore shares several methods like `getAction`. Make sure that your methods in `QLearningAgent` call `getQValue` instead of accessing Q-values directly, so that when you override `getQValue` in your approximate agent, the new approximate q-values are used to compute actions.
 
-Once you're confident that your approximate learner works correctly with the identity features, run your approximate Q-learning agent with our custom feature extractor, which can learn to win with ease:
+Once you're confident that your approximate learner works correctly with the identity features, **run your approximate Q-learning agent with our custom feature extractor,** which can learn to win with ease:
 
 <pre>python pacman.py -p ApproximateQAgent -a extractor=SimpleExtractor -x 50 -n 60 -l mediumGrid </pre>
 
@@ -542,7 +544,7 @@ Even much larger layouts should be no problem for your `ApproximateQAgent`. (_wa
 
 If you have no errors, your approximate Q-learning agent should win almost every time with these simple features, even with only 50 training games.
 
-_Grading:_ We will run your approximate Q-learning agent and check that it learns the same Q-values and feature weights as our reference implementation when each is presented with the same set of examples. To grade your implementation, run the autograder:
+_Grading:_ We will run your approximate Q-learning agent and check that it learns the same Q-values and feature weights as our reference implementation when each is presented with the same set of examples. To grade your implementation, **run the autograder:**
 
 <pre>python autograder.py -q q10</pre>
 
@@ -561,4 +563,4 @@ To run the autograder on a single question, such as question 3, invoke it by
 
 <pre>python autograder.py -q q3</pre>
 
-Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will submit `valueIterationAgents.py`, `qlearningAgents.py`, and `analysis.py` to the Project 3 assignment. You and your partner may submit as a group.
+Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will **submit `valueIterationAgents.py`, `qlearningAgents.py`, and `analysis.py`** to the Project 3 assignment. You and your partner may submit as a group.
