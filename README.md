@@ -237,7 +237,7 @@ The code for this project contains the following files, which are available in a
 
 **Getting Help:** You are not alone! If you find yourself stuck on something, contact the course staff for help. Office hours, section, and the discussion forum are there for your support; please use them. If you can't make our office hours, let us know and we will schedule more. We want these projects to be rewarding and instructional, not frustrating and demoralizing. But, we don't know when or how to help unless you ask.
 
-> "You're a novice -- that's why you're here. You're here to learn. The teacher is a resource for learning."--Carol S. Dweck, _Mindset_
+> "You're a novice -- that's why you're here. You're here to learn. The teacher is a resource for learning."---Carol S. Dweck, _Mindset_
 
 **Discussion:** Please be careful not to post spoilers.
 
