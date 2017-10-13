@@ -551,9 +551,39 @@ _Grading:_ We will run your approximate Q-learning agent and check that it learn
 _Congratulations! You have a learning Pacman agent!_
 
 ### <a name="Glossary"></a>Object Glossary
+**Agents**
+ValueIterationAgent - an offline learning agent which runs valuer iteration only updates one state at each iteration
 
+AsynchronousValueIterationAgent - an offline learning agent which runs value iteration and updates all states at each iteration.
 
-### <a name="submission"></a>Submission
+PrioritizedSweepingValueIterationAgent - an offline learning agent which runs value iteration in a way that tries to change the policy 
+by looking at the difference between its current value and what the value should be.
+
+QLearningAgent - an agent which determines the best policy using Q-values. When determining the policy, it breaks ties randomly.
+
+**Grids**
+All grids can be found [here](https://github.com/HEATlab/cs151-reinforcement/blob/master/gridworld.py)
+
+CliffGrid - a grid with a "cliff" (very negative exits along one edge) and one positive exit
+
+CliffGrid2 - a grid with a "cliff" and two positive exits of unequal weight and distance
+
+DiscountGrid - a grid with a "cliff" and two positive exits of unequal weight and distance with different weights and walls
+
+BridgeGrid - a grid where you can walk across a "bridge" (very negative exits on either side) to get to a more positive exit
+
+BookGrid - a simple grid (one wall) where an exit with reward +1 and an exit with reward -1 are right next to each other
+
+MazeGrid - a simple maze to get to a positive exit state
+
+**Useful**
+util.Counter() - a dictionary where any key has an automatic default value of 0. Can be used like a dictionary. Be certain to use the 
+copy() function to get deep copies instead of shallow ones!
+
+util.PriorityQueue() - a priority queue that can be used in the assignment. Methods: push(item, priority), pop(), isEmpty(), 
+update(item, priority). Update will only update the priority if the value given is better than the current priority.
+
+### <a name="Submission"></a>Submission
 
 Prior to submitting, be sure you run the autograder on your own machine. Running the autograder locally will help you to debug and expediate your development process. The autograder can be invoked on your own machine using the command:
 
