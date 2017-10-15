@@ -296,13 +296,27 @@ The following command loads your `ValueIterationAgent`, which will compute a pol
 
 <pre>python gridworld.py -a value -i 100 -k 10</pre>
 
-_Hint:_ On the default BookGrid, running value iteration for 5 iterations should give you this output:
+
+_**Getting Started: Hints and Observations**_
+
+*   Gamma is implemented as self.discount
+*   _init_ is where the value iteration.  We're planning offline, so we only have to run value iteration once!
+*   self.values is our DP table for values -- it's implemented as a dictionary that maps states to values
+*   `util.Counter()` # Gives a Counter object, which is a dict with default 0 for all entries
+*   Important helper function:  `def computeQValueFromValues(self, state, action):` This computes the value of q-state (expectation) given a state,action pair (using the current self.values)
+*  Important helper function:  `computeActionFromValues(self, state):` This computes the argmax (max action) given the current self.values. Once you've converged, this doubles as π∗(s) once you've converged to optimal values!
+*   As always, there are many useful helper functions found in the supporting files (i.e., Util.py and featureExtractor.py).
+
+*  _Hint:_ On the default BookGrid, running value iteration for 5 iterations should give you this output:
 
 <pre>python gridworld.py -a value -i 5</pre>
 
 ![value iteration with k=5](https://github.com/HEATlab/cs151-reinforcement/blob/master/value.png)
 
 _Grading:_ Your value iteration agent will be graded on a new grid. We will check your values, Q-values, and policies after fixed numbers of iterations and at convergence (e.g. after 100 iterations).
+
+
+
 
 
 ### <a name="Q2"></a>Question 2 (1 point): Bridge Crossing Analysis
