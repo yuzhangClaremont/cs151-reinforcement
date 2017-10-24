@@ -269,7 +269,7 @@ As in Pacman, positions are represented by `(x,y)` Cartesian coordinates and any
 
 ### <a name="Q1"></a>Question 1 (4 points): Value Iteration
 
-**Write a value iteration agent in `ValueIterationAgent`**, which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. `ValueIterationAgent` takes an MDP on construction and calls `runValueIteration`, which runs value iteration for `self.iterations` iterations before the constructor returns.
+**Write a value iteration agent in `ValueIterationAgent`**, which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. `ValueIterationAgent` takes an MDP on construction and calls `runValueIteration`. **Implement `runValueIteration(self)` before you start implementing the methods for `ValueIterationAgent`.** `runValueIteration(self)` runs value iteration for `self.iterations` iterations before the constructor returns.
 
 Value iteration computes k-step estimates of the optimal values, V<sub>k</sub>. In addition to running value iteration, **implement the following methods for `ValueIterationAgent` using V<sub>k</sub>.**
 
@@ -363,7 +363,7 @@ _Grading:_ We will check that the desired policy is returned in each case.
 
 **Write a value iteration agent in `AsynchronousValueIterationAgent`,** which has been partially specified for you in `valueIterationAgents.py`. Your value iteration agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option `-i`) in its initial planning phase. <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span> takes an MDP on construction and runs _cyclic _value iteration (described in the next paragraph) for the specified number of iterations before the constructor returns. Note that all this value iteration code should be placed inside the constructor (`__init__` method).
 
-The reason this class is called <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span><span style="line-height: 25.6px;"> </span><span style="line-height: 25.6px;">is because we will update only **one** state in each iteration, as opposed to doing a batch-style update. </span><span style="line-height: 25.6px;">Here is how cyclic value iteration works. In the first iteration, only update the value of the first state in the states list. In the second iteration, only update the value of the second. Keep going until you have updated the value of each state once, then start back at the first state for the subsequent iteration. **If the state picked for updating is terminal, nothing happens in that iteration.** You should be indexing into the </span>`states`<span style="line-height: 25.6px;"> variable defined in the code skeleton.</span>
+The reason this class is called <span style="font-family: monospace, serif; line-height: 25.6px;">AsynchronousValueIterationAgent</span><span style="line-height: 25.6px;"> </span><span style="line-height: 25.6px;">is because we will update only **one** state in each iteration, as opposed to doing a batch-style update. </span><span style="line-height: 25.6px;">Here is how cyclic value iteration works. In the first iteration, only update the value of the first state in the states list.  In the second iteration, only update the value of the second. Keep going until you have updated the value of each state once, then start back at the first state for the subsequent iteration. **If the state picked for updating is terminal, nothing happens in that iteration.** You should be indexing into the </span>`states`<span style="line-height: 25.6px;"> variable defined in the code skeleton.</span> In each iteration, each state should be updated based on where the agent ends up terminating.
 
 As a reminder, here's the value iteration state update equation:
 
@@ -430,7 +430,7 @@ _Grading:_ Your prioritized sweeping value iteration agent will be graded on a
 
 Note that your value iteration agent does not actually learn from experience. Rather, it ponders its MDP model to arrive at a complete policy before ever interacting with a real environment. When it does interact with the environment, it simply follows the precomputed policy (e.g. it becomes a reflex agent). This distinction may be subtle in a simulated environment like a Gridword, but it's very important in the real world, where the real MDP is not available.
 
-You will now write a Q-learning agent, which does very little on construction, but instead learns by trial and error from interactions with the environment through its `update(state, action, nextState, reward)` method. A stub of a Q-learner is specified in `QLearningAgent` in `qlearningAgents.py`, and you can select it with the option `'-a q'`. For this question, you must **implement the `update`, `computeValueFromQValues`, `getQValue`, and `computeActionFromQValues` methods.**
+You will now write a Q-learning agent, which does very little on construction, but instead learns by trial and error from interactions with the environment through its `update(state, action, nextState, reward)` method. A stub of a Q-learner is specified in `QLearningAgent` in `qlearningAgents.py`, and you can select it with the option `'-a q'`. For this question, you must **implement the `_init_`, `update`, `computeValueFromQValues`, `getQValue`, and `computeActionFromQValues` methods.**
 
 _Note:_ For `computeActionFromQValues`, you should break ties randomly for better behavior. The `random.choice()` function will help. In a particular state, actions that your agent _hasn't_ seen before still have a Q-value, specifically a Q-value of zero, and if all of the actions that your agent _has_ seen before have a negative Q-value, an unseen action may be optimal.
 
@@ -540,7 +540,7 @@ where each weight w<sub>i</sub> is associated with a particular feature f<sub>i<
 ![equation](https://github.com/HEATlab/cs151-reinforcement/blob/master/q_diff.png)
 
 
-Note that the `difference` term is the same as in normal Q-learning, and `r` is the experienced reward.
+Note that the `difference` term is the same as in normal Q-learning, and `r` is the experienced reward. Also, `difference` should be calculated before any weight vector is updated in the loop.
 
 By default, `ApproximateQAgent` uses the `IdentityExtractor`, which assigns a single feature to every `(state,action)` pair. With this feature extractor, your approximate Q-learning agent should work identically to `PacmanQAgent`. You can test this with the following command:
 
@@ -570,7 +570,7 @@ ValueIterationAgent - an offline learning agent which runs valuer iteration only
 
 AsynchronousValueIterationAgent - an offline learning agent which runs value iteration and updates all states at each iteration.
 
-PrioritizedSweepingValueIterationAgent - an offline learning agent which runs value iteration in a way that tries to change the policy 
+PrioritizedSweepingValueIterationAgent - an offline learning agent which runs value iteration in a way that tries to change the policy
 by looking at the difference between its current value and what the value should be.
 
 QLearningAgent - an agent which determines the best policy using Q-values. When determining the policy, it breaks ties randomly.
@@ -591,10 +591,10 @@ BookGrid - a simple grid (one wall) where an exit with reward +1 and an exit wit
 MazeGrid - a simple maze to get to a positive exit state
 
 **Useful**
-util.Counter() - a dictionary where any key has an automatic default value of 0. Can be used like a dictionary. Be certain to use the 
+util.Counter() - a dictionary where any key has an automatic default value of 0. Can be used like a dictionary. Be certain to use the
 copy() function to get deep copies instead of shallow ones!
 
-util.PriorityQueue() - a priority queue that can be used in the assignment. Methods: push(item, priority), pop(), isEmpty(), 
+util.PriorityQueue() - a priority queue that can be used in the assignment. Methods: push(item, priority), pop(), isEmpty(),
 update(item, priority). Update will only update the priority if the value given is better than the current priority.
 
 ### <a name="Submission"></a>Submission
